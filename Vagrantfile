@@ -7,10 +7,10 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
 
-  config.vm.define "liferay7" do |liferay7|
+  config.vm.define "liferaydev" do |liferaydev|
   end
 
-  config.vm.hostname = "liferay7"
+  config.vm.hostname = "liferaydev"
 
   config.vm.provider :virtualbox do |vb, override|
     vb.customize ["modifyvm", :id,
