@@ -7,23 +7,23 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
 
-  config.vm.define "liferaydev" do |liferaydev|
+  config.vm.define "liferay7" do |liferay7|
   end
 
-  config.vm.hostname = "liferaydev"
+  config.vm.hostname = "liferay7"
 
   config.vm.provider :virtualbox do |vb, override|
     vb.customize ["modifyvm", :id,
-        "--name", "liferaydev",
+        "--name", "liferay7",
         "--memory", "2048"]
   end
+
+  config.vm.network :forwarded_port, guest: 8080, host: 4040
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file = "base.pp"
     puppet.module_path = "modules"
   end
-
-config.vm.network :forwarded_port, guest: 8080, host: 4040
 
 end

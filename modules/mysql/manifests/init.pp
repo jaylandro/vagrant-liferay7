@@ -12,7 +12,7 @@ class mysql {
     require => Package["mysql-server"]
   }
 
-  $password = "eivnc7UCo2"
+  $password = "password"
 
   exec {"mysql-passwd":
     unless => "mysqladmin -uroot -p${password} status",
@@ -23,7 +23,7 @@ class mysql {
 
   $l_db = "lportal"
   $l_user = "liferay"
-  $l_pass = "kdnv7FKc3"
+  $l_pass = "password"
 
   exec {"create-liferay-db":
     unless => "mysql -u${l_user} -p${l_pass} ${l_db}",
