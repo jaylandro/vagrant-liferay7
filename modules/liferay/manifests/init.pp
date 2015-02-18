@@ -4,8 +4,8 @@ class liferay {
   $install_path = "/opt/liferay"
 
   exec {"stop-liferay":
-    command => "${install_path}/liferay-portal-7.0-ce-m2/tomcat-7.0.42/bin/catalina.sh stop",
-    onlyif => "test -f ${install_path}/liferay-portal-7.0-ce-m2/tomcat-7.0.42/bin/catalina.sh",
+    command => "${install_path}/liferay-portal-7.0-ce-m3/tomcat-7.0.42/bin/catalina.sh stop",
+    onlyif => "test -f ${install_path}/liferay-portal-7.0-ce-m3/tomcat-7.0.42/bin/catalina.sh",
     path => ["/usr/bin", "/bin"],
   }
 
@@ -20,7 +20,7 @@ class liferay {
   }
 
   exec {"get-liferay":
-    command => "wget http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/7.0.0%20M2/liferay-portal-tomcat-7.0-ce-m2-20141017162509960.zip -O /home/vagrant/liferay.zip",
+    command => "wget http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/7.0.0%20M3/liferay-portal-tomcat-7.0-ce-m3-20141217115214620.zip -O /home/vagrant/liferay.zip",
     cwd => "/home/vagrant",
     path => ["/usr/bin", "/bin"],
     require => Package["wget"],
@@ -43,14 +43,14 @@ class liferay {
   }
 
   file {"portal-ext.properties":
-    path => "${install_path}/liferay-portal-7.0-ce-m2/tomcat-7.0.42/webapps/ROOT/WEB-INF/classes/portal-ext.properties",
+    path => "${install_path}/liferay-portal-7.0-ce-m3/tomcat-7.0.42/webapps/ROOT/WEB-INF/classes/portal-ext.properties",
     source => "puppet:///modules/liferay/portal-ext.properties",
     require => Exec["unzip-liferay"]
   }
 
   exec {"start-liferay":
-    command => "${install_path}/liferay-portal-7.0-ce-m2/tomcat-7.0.42/bin/catalina.sh start",
-    onlyif => "test -f ${install_path}/liferay-portal-7.0-ce-m2/tomcat-7.0.42/bin/catalina.sh",
+    command => "${install_path}/liferay-portal-7.0-ce-m3/tomcat-7.0.42/bin/catalina.sh start",
+    onlyif => "test -f ${install_path}/liferay-portal-7.0-ce-m3/tomcat-7.0.42/bin/catalina.sh",
     path => ["/usr/bin", "/bin"],
     require => File["portal-ext.properties"]
   }
