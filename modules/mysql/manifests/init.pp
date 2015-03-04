@@ -27,7 +27,7 @@ class mysql {
 
   exec {"create-liferay-db":
     unless => "mysql -u${l_user} -p${l_pass} ${l_db}",
-    command => "mysql -uroot -p${password} -e \"create database ${l_db};grant all on ${l_db}.* to ${l_user}@'localhost' identified by '${l_pass}'; flush privileges;\"",
+    command => "mysql -uroot -p${password} -e \"create database ${l_db} character set utf8;grant all on ${l_db}.* to ${l_user}@'localhost' identified by '${l_pass}'; flush privileges;\"",
     path => ["/usr/bin", "/bin"],
     require => Exec["mysql-passwd"]
   }
